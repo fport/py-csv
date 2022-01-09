@@ -1,6 +1,15 @@
-import csv 
-    
+# Muhammet Furkan Portakal
+# 18360859046
 
+# CSV DOSYASI => data.csv olmak zorundadir.
+# Id,Name,Gender,Phone,Lesson
+# 1010,Ramiz Portakal,Male,553-841-47-89,Math
+# 1020,Selma Sakarya,Female,505-782-22-44,Music
+# 1030,John Doe,Male,512-224-55-75,Physics
+
+import csv 
+
+# read function
 def read():
     with open('data.csv', mode ='r') as file: 
           
@@ -16,6 +25,7 @@ def read():
                 print(lines) 
                 line_count += 1
 
+# write function
 def write():
     print('CSV dosyasina eklemek icin sirayla gelicek bilgileri doldurmalisiniz!')
     new_Id = input('\n Id giriniz')
@@ -33,13 +43,20 @@ def write():
 
         csvwriter.writerow(fields)
 
+# search function
 def search(gender):
+    sayac = 0
     with open('data.csv', 'r') as csvfile:
         csvreader = csv.reader(csvfile)
         for row in csvreader:
-            if row[2] == gender:
-                print(row)
+            if row[2].lower() == gender.lower():
+                print('Sonuca uygun olan id =>',row[0])
+                sayac += 1
 
+    if sayac == 0:
+        print('\nAranan bulunamadi...')
+
+# start function
 def start():
     print("""
      __________________________________________________
@@ -58,7 +75,7 @@ def start():
     elif x == '2':
         write()
     elif x == '3':
-        gender = input('lutfen male/female seciniz: \t')
+        gender = input('Aranan kelimeyi giriniz: \t')
         search(gender)
     elif x == '4':
         exit()
