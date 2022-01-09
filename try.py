@@ -2,14 +2,11 @@ import csv
     
 
 def read():
-    # opening the CSV file 
     with open('data.csv', mode ='r') as file: 
           
-      # reading the CSV file 
         csvFile = csv.reader(file) 
         
         line_count = 0
-      # displaying the contents of the CSV file 
         for lines in csvFile: 
             if line_count == 0:
                 line_count += 1
@@ -29,23 +26,19 @@ def write():
 
     fields = [new_Id, new_Name, new_Gender, new_Phone, new_Lesson]
 
-    # name of csv file
     filename = "data.csv"
 
-    # writing to csv file
     with open(filename, 'a+') as csvfile:
-        # creating a csv writer object
         csvwriter = csv.writer(csvfile)
 
-        # writing the fields
         csvwriter.writerow(fields)
 
-        # # writing the data rows
-        # csvwriter.writerows(rows)
-
-
-def search():
-    print('ara ulan')
+def search(gender):
+    with open('data.csv', 'r') as csvfile:
+        csvreader = csv.reader(csvfile)
+        for row in csvreader:
+            if row[2] == gender:
+                print(row)
 
 def start():
     print("""
@@ -65,11 +58,12 @@ def start():
     elif x == '2':
         write()
     elif x == '3':
-        search()
+        gender = input('lutfen male/female seciniz: \t')
+        search(gender)
     elif x == '4':
         exit()
     else:
-        print('yanlis secim haci')
+        print('Hatali secim!')
 
 
 while(1<2):
